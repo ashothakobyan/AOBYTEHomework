@@ -1,35 +1,7 @@
+import DomElement, { DivElement } from "./clases.js";
+
 const el = (type, attrs, children) => {
-  class DomElement {
-    constructor(type, attrs, children) {
-      this.type = type;
-      this.attrs = attrs;
-      this.children = children;
-    }
-    draw = () => {
-      let element = document.createElement(this.type);
-      if (
-        !Array.isArray(this.children) &&
-        typeof this.children === "object" &&
-        this.children !== null
-      ) {
-        element.appendChild(this.children.draw());
-      } else if (Array.isArray(this.children)) {
-        this.children.forEach((child) => element.appendChild(child.draw()));
-      } else if (typeof this.children === "string") {
-        element.appendChild(document.createTextNode(this.children));
-      }
-
-      if (Object.keys(this.attrs).length) {
-        for (const [key, value] of Object.entries(this.attrs)) {
-          element.setAttribute(key, value);
-        }
-      }
-
-      return element;
-    };
-  }
-
-  return new DomElement(type, attrs, children);
+  return new DivElement(type, attrs, children);
 };
 
 const tree = el(
